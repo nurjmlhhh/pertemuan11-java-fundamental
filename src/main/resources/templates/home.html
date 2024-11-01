@@ -21,10 +21,13 @@
                     <td th:text="${login.username}" class="table-primary">Username</td>
                     <td>
         
-                        <a href="@{/update-akun/{id}(id=${login.id})}" class="btn btn-warning">Update</a>
-                        <a href="@{/delete-akun/{id}(id=${login.id})}" class="btn btn-danger">Delete</a>
+                        <a th:href="@{/update-akun/{id}(id=${login.id})}" class="btn btn-warning">Update</a>
+                        <a th:href="@{/delete-akun/{id}(id=${login.id})}" class="btn btn-danger">Delete</a>
                       </tr>
             </tbody>
           </table>
+          <a th:href="@{/login}">Login</a>
+          <a th:href="@{/registrasi}">Registrasi</a>
+  
     </body>
 </html>

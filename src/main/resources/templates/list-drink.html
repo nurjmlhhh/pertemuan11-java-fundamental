@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Drink List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Drink List</h2>
+        <a href="/add-drink" class="btn btn-success mb-3">Add New Drink</a>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="a : ${drink}">
+                    <td th:text="${a.id}">ID</td>
+                    <td th:text="${a.name}">Drink Name</td>
+                    <td th:text="${a.price}">Price</td>
+                    <td>
+                        <!-- <a th:href="@{'/delete-drink/' + ${drink.id}}" class="btn btn-danger btn-sm">Delete</a> -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

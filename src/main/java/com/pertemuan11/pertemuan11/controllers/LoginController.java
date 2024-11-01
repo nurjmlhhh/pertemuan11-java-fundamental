@@ -20,46 +20,64 @@ public class LoginController {
     private LoginService loginService;
 
     @GetMapping("registrasi")
-    public String registrasi(Model model){
+    public String registrasi(Model model) {
         Login login = new Login();
         model.addAttribute("regis", login);
         return "registrasi";
     }
 
-
     @PostMapping("save-regis")
-    public String saveRegis(@ModelAttribute ("regis") Login login){
+    public String saveRegis(@ModelAttribute("regis") Login login) {
         loginService.save(login);
         return "redirect:registrasi";
     }
 
     @GetMapping("login")
-    public String login(){
+    public String login() {
         return "login";
     }
 
     @PostMapping("cek-login")
-    public String login(@RequestParam ("username") String username, 
-                        @RequestParam ("password") String password, Model model){
+    public String login(@RequestParam("username") String username,
+            @RequestParam("password") String password, Model model) {
         Login login = loginService.findByUsernameAndPassword(username, password);
-        if(login != null){
+        if (login != null) {
             model.addAttribute("login", login);
-            return "home";
-        }else{
+            return "redirect:/home";
+        } else {
             return "redirect:/login";
         }
     }
 
     @GetMapping("delete-akun/{id}")
-    public String deleteAkun(@PathVariable (value = "id") Integer id){
+    public String deleteAkun(@PathVariable(value = "id") Integer id) {
         loginService.deleteById(id);
         return "redirect:/home";
     }
 
     @GetMapping("/home")
-    public String home(Model model){
-        List <Login> login = loginService.getAllLogin();
+    public String home(Model model) {
+        List<Login> login = loginService.getAllLogin();
         model.addAttribute("login", login);
         return "home";
+    }
+
+    @GetMapping("/update-akun/{id}")
+    public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+        Login login = loginService.findById(id);
+        model.addAttribute("login", login);
+        return "update-akun"; 
+    }
+
+    @PostMapping("/update-akun/{id}")
+    public String update(@PathVariable(value = "id") Integer id, @ModelAttribute("login") Login login) {
+        Login update = loginService.findById(id);
+        if (update != null) {
+
+            update.setPassword(login.getPassword());
+            update.setUsername(login.getUsername());
+            loginService.save(login);
+        }
+        return "redirect:/home";
     }
 }

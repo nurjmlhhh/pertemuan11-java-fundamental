@@ -31,4 +31,8 @@ public class LoginService {
     public List<Login> getAllLogin(){
         return loginRepository.findAll();
     }
+
+    public Login findById(Integer id){
+        return loginRepository.findById(id).orElse(null);
+    }
 }

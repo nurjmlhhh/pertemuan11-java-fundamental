@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>List of Chefs</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">List of Chefs</h1>
+        
+        <!-- Table with Bootstrap styling -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Asal</th>
+                        <th>Food</th>
+                        <th>Drink</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="chef : ${chefs}">
+                        <td th:text="${chef.id}"></td>
+                        <td th:text="${chef.name}"></td>
+                        <td th:text="${chef.asal}"></td>
+                        <td th:text="${chef.food.name}"></td>
+                        <td th:text="${chef.drink.name}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Button to add new chef -->
+        <div class="text-center mt-4">
+            <a href="/add-chef" class="btn btn-primary">Add New Chef</a>
+        </div>
+    </div>
+</body>
+</html>
